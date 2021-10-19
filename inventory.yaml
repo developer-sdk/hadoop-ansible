@@ -1,0 +1,52 @@
+---
+all:
+  hosts:
+    hadoop-dev-master-1:
+    hadoop-dev-worker-[1:4]:
+
+  children:
+    # ---- zookeeper ----
+    zookeeper:
+      hosts:
+        hadoop-dev-master-1:
+
+    # ---- hadooop ----
+    hadoop:
+      hosts:
+        hadoop-dev-master-1:
+        hadoop-dev-worker-[1:4]:
+
+    # ---- hdfs ----
+    hdfs:
+      hosts:
+        hadoop-dev-master-1:
+        hadoop-dev-worker-[1:4]:
+
+    hdfs_namenode:
+      hosts:
+        hadoop-dev-master-1:
+
+    hdfs_datanode:
+      hosts:
+        hadoop-dev-worker-[1:4]:
+
+    # ---- yarn ----
+    yarn:
+      hosts:
+        hadoop-dev-master-1:
+        hadoop-dev-worker-[1:4]:
+
+    yarn_resourcemanager:
+      hosts:
+        hadoop-dev-master-1:
+
+    yarn_nodemanager:
+      hosts:
+        hadoop-dev-worker-[1:4]:
+
+    yarn_historyserver:
+      hosts:
+        hadoop-dev-master-1:
+
+  vars:
+    fs_default_fs: "hdfs://hadoop-dev-master-1"
